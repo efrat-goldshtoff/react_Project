@@ -5,7 +5,7 @@ import { userContext } from "./Login";
 import UpdateDetails from "./UpdateDetails";
 
 
-export const btnUpdateContext = createContext<[boolean, Dispatch<SetStateAction<Boolean>>]>([
+export const btnUpdateContext = createContext<[boolean, Dispatch<SetStateAction<boolean>>]>([
     {} as boolean,
     () => { },
   ]);
