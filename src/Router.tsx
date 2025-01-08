@@ -1,20 +1,20 @@
 import { createBrowserRouter } from "react-router";
 import First from "./components/First";
-import Login from "./components/Login";
 import Second from "./components/Second";
+import AppLayout from "./components/AppLayout";
 
-export const Router =
+const myRouter =
     createBrowserRouter([
         {
             path: '/',
-            element: <Login />,
+            element: <AppLayout/>,//<Login />,
             errorElement: <>main error</>,
             children: [
                 {
                     path: 'first', element: <First />,
-                    // children: [
-                    //     { path: 'bbb', element: <>I am a child of first</> }
-                    // ]
+                    children: [
+                        { path: 'bbb', element: <>I am a child of first</> }
+                    ]
                 },
                 {
                     path: 'second', element: <Second />
@@ -23,3 +23,4 @@ export const Router =
         }
     ]
     )
+export default myRouter
