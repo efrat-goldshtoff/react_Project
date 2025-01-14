@@ -1,16 +1,16 @@
 import './App.css'
-// import Login from './components/Login'
 
 import { RouterProvider } from 'react-router'
 import myRouter from './Router'
+import HomePage from './components/HomePage'
 
 
 function App() {
 
   return (
     <>
-    {/* <Login/> */}
       {/* <h2>app</h2> */}
+      <HomePage/>
       <RouterProvider router={myRouter} />
     </>
   )

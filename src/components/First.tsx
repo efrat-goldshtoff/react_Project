@@ -1,7 +1,7 @@
 const First=()=>{
 
     return (<>
-    <h1>"first page!!!"</h1>
+    <h3 style={{color:'purple'}}>"first page!!!"</h3>
     </>)
 }
 export default First

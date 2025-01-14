@@ -1,12 +1,12 @@
 import { Outlet } from "react-router"
 import NavBar from "./NavBar"
-import Login from "./Login"
+// import Login from "./Login"
 
 const AppLayout = () => {
     return (<>
         <div>
-            <h1>Home</h1>
-            <Login/>
+            <h1 style={{color:'violet'}}>Home</h1>
+            {/* <Login/> */}
             <NavBar />
             <div></div>
             <Outlet />

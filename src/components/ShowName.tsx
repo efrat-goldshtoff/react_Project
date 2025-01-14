@@ -30,8 +30,8 @@ export const btnUpdateContext = createContext<[boolean, Dispatch<SetStateAction<
             top: '50%',
             left: '50%',
           }}>
-             <h3> hello, {user.firstName}   </h3>
-            <h2>my home</h2>
+             <h1> hello, {user.firstName}   </h1>
+             <h5>my home</h5>
            
             </div>
           <button onClick={() => { setUpdateBtn(true) }} style={{

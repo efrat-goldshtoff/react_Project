@@ -1,81 +1,87 @@
-import { Modal, Box, Typography, TextField } from "@mui/material";
+import { Modal, Box, TextField, Button } from "@mui/material";
 import { useState, useContext, useRef } from "react";
-import { userContext } from "./Login";
-import { btnUpdateContext } from "./ShowName";
+import { UserContext } from "./userContext";
+import axios from "axios";
 
 const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
 };
 
-const UpdateDetails=()=>{
+const UpdateDetails = ({ setUpdate }: { setUpdate: Function }) => {
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
 
-    const [open, setOpen] = useState(true);
-    const handleClose = () => setOpen(false);
+  const context = useContext(UserContext);
+  const [open, setOpen] = useState(true);
 
-    const [user,Dispatch]=useContext(userContext)
-    const [btnUpdate,btnUpdateDispatch]=useContext(btnUpdateContext)
-    
-    const firstNameRef = useRef<HTMLInputElement>(null);
-    const lastNameRef = useRef<HTMLInputElement>(null);
-    const addressRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
-    const emailRef = useRef<HTMLInputElement>(null);
-    const phonRef = useRef<HTMLInputElement>(null);
-
-    const handelUpdate = () => {
-        Dispatch(
-            {
-                type:'UPDATE',
-                data:{
-                firstName: firstNameRef.current?.value || "",
-                lastName: lastNameRef.current?.value || "",
-                password: passwordRef.current?.value || "",
-                address: addressRef.current?.value || "",
-                phone: phonRef.current?.value || "",
-                email:emailRef.current?.value || "",
-                }
-            }
-        )
-        setOpen(false);
-        btnUpdateDispatch(!btnUpdate)
+  const handelUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!context?.user.firstName) {
+      alert('user not logged in');
+      return;
     }
+    try {
+      const result = await axios.put("http://localhost:3000/api/user",
+        {
+          firstName: firstNameRef.current?.value,
+          lastName: lastNameRef.current?.value,
+          address: addressRef.current?.value,
+          email: emailRef.current?.value,
+          phone: phoneRef.current?.value
+        },
+        { headers: { 'user-id': context?.user.id } }
+      )
+      context?.userDispatch({
+        type: 'UPDATE',
+        data: {
+          firstName: firstNameRef.current?.value || '',
+          lastName: lastNameRef.current?.value || '',
+          address: addressRef.current?.value || '',
+          email: emailRef.current?.value || '',
+          phone: phoneRef.current?.value || ''
+        }
+      })
+      setOpen(false);
+      setUpdate();
+    }
+    catch (e: any) {
+      if (e.status === 404)
+        alert('this user is not exist');
+      console.log(e);
 
-return( 
-       <div>
+    }
+  }
+
+  return (<>
     <Modal
       open={open}
-      onClose={handleClose}
+      onClose={() => setUpdate()}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
-        <form action="">
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          מלא את הפרטים
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-
-        <TextField label="שם פרטי" inputRef={firstNameRef  }sx={{ mt: 2 }} />
-        <TextField label="שם משפחה" inputRef={lastNameRef } sx={{ mt: 2 }}/>
-        <TextField label="סיסמא" inputRef={passwordRef} sx={{ mt: 2 }}/>
-        <TextField label="כתובת" inputRef={addressRef } sx={{ mt: 2 }}/>
-        <TextField label="טלפון" inputRef={phonRef }sx={{ mt: 2 }} />
-        <TextField label="מייל" inputRef={emailRef} sx={{ mt: 2 }}/>
-        <button  onClick={()=>handelUpdate()} style={{margin:'40px'}}>עדכן</button>
-
-        </Typography>
-        </form>
-      </Box>
+      <form onSubmit={handelUpdate}>
+        <Box sx={style}>
+          <TextField label="first name" inputRef={firstNameRef} sx={{ mt: 2 }} />
+          <TextField label="last name" inputRef={lastNameRef} sx={{ mt: 2 }} />
+          <TextField label="address" inputRef={addressRef} sx={{ mt: 2 }} />
+          <TextField label="phone" inputRef={phoneRef} sx={{ mt: 2 }} />
+          <TextField label="email" inputRef={emailRef} sx={{ mt: 2 }} />
+          <Button style={{ margin: '40px' }}>update</Button>
+        </Box>
+      </form>
     </Modal>
-   
-  </div>)
+
+  </>)
 }
 export default UpdateDetails

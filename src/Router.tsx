@@ -2,19 +2,20 @@ import { createBrowserRouter } from "react-router";
 import First from "./components/First";
 import Second from "./components/Second";
 import AppLayout from "./components/AppLayout";
+// import HomePage from "./components/HomePage";
 
 const myRouter =
     createBrowserRouter([
         {
             path: '/',
-            element: <AppLayout/>,//<Login />,
+            element: <AppLayout />,//<Login />,
             errorElement: <>main error</>,
             children: [
+                // {
+                //     path: '/', element: <HomePage />
+                // },
                 {
-                    path: 'first', element: <First />,
-                    children: [
-                        { path: 'bbb', element: <>I am a child of first</> }
-                    ]
+                    path: 'first', element: <First />
                 },
                 {
                     path: 'second', element: <Second />

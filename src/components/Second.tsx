@@ -1,7 +1,7 @@
 const Second=()=>{
 
     return (<>
-    <h1>"second page!!!"</h1>
+    <h3 style={{color:'purple'}}>"second page!!!"</h3>
     </>)
 }
 export default Second
