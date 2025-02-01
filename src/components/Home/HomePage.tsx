@@ -1,9 +1,9 @@
 import { useReducer, useState } from "react";
-import { userReducer, UserType } from "./User";
-import { UserContext } from "./userContext";
 import { Button } from "@mui/material";
-import Login from "./Login";
-import AvatarU from "./AvatarU";
+import { userReducer, UserType } from "../Login/User";
+import Login from "../Login/Login";
+import AvatarU from "../Login/AvatarU";
+import { UserContext } from "../Login/UserContext";
 
 const HomePage = () => {
     const initUser: UserType = {
@@ -28,7 +28,7 @@ const HomePage = () => {
     }
 
     return (<>
-        <UserContext.Provider value={{ user, userDispatch }}>
+        <UserContext value={{ user, userDispatch }}>
             {!isLogin && (
                 <>
                     <Button variant='contained'
@@ -55,8 +55,8 @@ const HomePage = () => {
                     close={() => setIsOpen(false)}
                 />
             }
-            {isLogin&&<AvatarU/>}
-        </UserContext.Provider>
+            {isLogin && <AvatarU />}
+        </UserContext>
     </>)
 }
 export default HomePage;

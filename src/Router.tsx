@@ -1,27 +1,43 @@
 import { createBrowserRouter } from "react-router";
-import First from "./components/First";
-import Second from "./components/Second";
-import AppLayout from "./components/AppLayout";
-// import HomePage from "./components/HomePage";
+import First from "./components/More/First";
+import Second from "./components/More/Second";
+import AppLayout from "./components/Home/AppLayout";
+import AddRecipe from "./components/Recipes/AddRecipe";
+import Menu from "./components/Home/Menu";
+import RecipeDetails from "./components/Recipes/RecipeDetails";
 
 const myRouter =
     createBrowserRouter([
         {
             path: '/',
-            element: <AppLayout />,//<Login />,
+            element: <AppLayout />,
             errorElement: <>main error</>,
             children: [
-                // {
-                //     path: '/', element: <HomePage />
-                // },
                 {
-                    path: 'first', element: <First />
+                    path: '/first',
+                    element: <First />
                 },
                 {
-                    path: 'second', element: <Second />
+                    path: '/second',
+                    element: <Second />
+                },
+                {
+                    path: '/recipes',
+                    element: <Menu />,
+                    children:
+                        [
+                            {
+                                path: ':id',
+                                element: <RecipeDetails />
+                            }
+                        ]
+                },
+                {
+                    path: '/addRecipe',
+                    element: <AddRecipe />
                 }
             ]
         }
     ]
-    )
+    );
 export default myRouter

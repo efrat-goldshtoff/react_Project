@@ -49,3 +49,6 @@ export default tseslint.config({
 })
 ```
 "# react_Project" 
+```
+In the server I changed email to firstName
+```

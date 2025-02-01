@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UserContext } from "./userContext";
+import { UserContext } from "./UserContext";
 import { Avatar, Box, Button, Modal, Typography } from "@mui/material";
 import { pink } from "@mui/material/colors";
 import UpdateDetails from "./UpdateDetails";
@@ -15,30 +15,30 @@ const style = {
     gap: 2,
     padding: 2,
     width: 250,
-    bgcolor: 'background.paper',
-    borderRadius: 2,
-
+    bgcolor: 'background.deepPurple',
+    borderRadius: 2
 }
 const AvatarU = () => {
     const context = useContext(UserContext);
-    // console.log("User context: ", context?.user.firstName); 
-    const [open, setOpen] = useState(false);
     if (!context)
         return null;
+    const [open, setOpen] = useState(false);
+
     return (<>
         <Box sx={style}>
             <Typography sx={{
                 fontWeight: 'bold',
                 color: '#333', marginBottom: 1
             }}>
-                Hello {context?.user.firstName}</Typography>
-            <Avatar sx={{
-                bgcolor: pink[600]
-                , width: 55, height: 55,
-                fontSize: 24, fontWeight: 'bold'
-            }}>
-                {context?.user.firstName.charAt(0).toLocaleUpperCase()}
-            </Avatar>
+                Hello
+                <Avatar sx={{
+                    bgcolor: pink[600]
+                    , width: 55, height: 55,
+                    fontSize: 24, fontWeight: 'bold'
+                }}>
+                    {context?.user.firstName.charAt(0).toLocaleUpperCase()}
+                </Avatar>
+            </Typography>
             <Button color='primary' variant="contained"
                 sx={{
                     background: 'black',
@@ -65,7 +65,6 @@ const AvatarU = () => {
             }}>
                 <UpdateDetails setUpdate={() => setOpen(false)} />
             </Box>
-
         </Modal>
     </>)
 }

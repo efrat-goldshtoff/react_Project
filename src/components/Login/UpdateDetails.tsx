@@ -1,6 +1,6 @@
 import { Modal, Box, TextField, Button } from "@mui/material";
 import { useState, useContext, useRef } from "react";
-import { UserContext } from "./userContext";
+import { UserContext } from "./UserContext";
 import axios from "axios";
 
 const style = {
@@ -25,7 +25,7 @@ const UpdateDetails = ({ setUpdate }: { setUpdate: Function }) => {
   const context = useContext(UserContext);
   const [open, setOpen] = useState(true);
 
-  const handelUpdate = async (e: React.FormEvent) => {
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!context?.user.firstName) {
       alert('user not logged in');
@@ -55,14 +55,11 @@ const UpdateDetails = ({ setUpdate }: { setUpdate: Function }) => {
       setOpen(false);
       setUpdate();
     }
-    catch (e: any) {
-      if (e.status === 404)
-        alert('this user is not exist');
-      console.log(e);
-
+    catch (error: any) {
+      if (error.status === 404)
+        alert('User Not Exist');
     }
   }
-
   return (<>
     <Modal
       open={open}
@@ -70,18 +67,25 @@ const UpdateDetails = ({ setUpdate }: { setUpdate: Function }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <form onSubmit={handelUpdate}>
+      <form onSubmit={handleUpdate}>
         <Box sx={style}>
           <TextField label="first name" inputRef={firstNameRef} sx={{ mt: 2 }} />
           <TextField label="last name" inputRef={lastNameRef} sx={{ mt: 2 }} />
           <TextField label="address" inputRef={addressRef} sx={{ mt: 2 }} />
           <TextField label="phone" inputRef={phoneRef} sx={{ mt: 2 }} />
           <TextField label="email" inputRef={emailRef} sx={{ mt: 2 }} />
-          <Button style={{ margin: '40px' }}>update</Button>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              background: 'black',
+              color: "white",
+              borderRadius: '10px',
+              border: '2px solid white'
+            }}>update</Button>
         </Box>
       </form>
     </Modal>
-
   </>)
 }
 export default UpdateDetails
