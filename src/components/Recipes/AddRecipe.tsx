@@ -42,11 +42,11 @@ const AddRecipe = () => {
             title: data.title,
             description: data.description,
             products: data.products,
-            ingredients: data.ingredients,
+            ingredients: data.ingredients.split(",").map((i:string)=>i.trim()),
             instructions: data.instructions,
             id: "",
             authorId: ""
-        };
+        };        
         if (context && context.user) {
             RecipesStore.addRecipe(recipe, context.user.id);
             reset();

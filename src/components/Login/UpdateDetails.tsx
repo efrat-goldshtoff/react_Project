@@ -27,12 +27,13 @@ const UpdateDetails = ({ setUpdate }: { setUpdate: Function }) => {
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(context?.user);
     if (!context?.user.firstName) {
-      alert('user not logged in');
+      alert('User Not Logged In');
       return;
     }
     try {
-      const result = await axios.put("http://localhost:3000/api/user",
+      const result = await axios.put("http://localhost:3000/api/user/",
         {
           firstName: firstNameRef.current?.value,
           lastName: lastNameRef.current?.value,

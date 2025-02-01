@@ -31,10 +31,13 @@ const Menu = observer(() => {
         </Paper>
         <Paper
             style={{
-                width: 600,
+                width: 1000,
+                overflow:'auto',
+                maxHeight:'300px',
+                // height:100,
                 position: "absolute",
                 left: 20,
-                top: 100,
+                bottom: 0,
                 padding:'10px'
                 // border:'1px solid black'
             }}>

@@ -1,5 +1,5 @@
-import { createContext } from "react";
 import { UserType } from "./User"
+import { createContext } from "react";
 
 export type UserContextT = {
     user: UserType,

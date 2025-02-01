@@ -16,9 +16,7 @@ const RecipeDetails = observer(() => {
                     <h4> Description:</h4>
                     <p>
                         {recipe.description}
-
                     </p>
-
                 </div>
                 <div>
                     <h4>Ingredients:</h4>
