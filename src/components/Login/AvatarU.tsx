@@ -4,7 +4,6 @@ import { Avatar, Box, Button, Modal, Typography } from "@mui/material";
 import { pink } from "@mui/material/colors";
 import UpdateDetails from "./UpdateDetails";
 
-
 const style = {
     position: "absolute",
     top: "5%",

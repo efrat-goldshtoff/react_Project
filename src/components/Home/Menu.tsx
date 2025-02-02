@@ -15,8 +15,7 @@ const Menu = observer(() => {
                 width: 250,
                 position: "absolute",
                 right: 20,
-                top: 100,
-                // border:'1px solid black'
+                top: 100
             }}>
             <h2>My Recipes!!</h2>
             <List>
@@ -32,14 +31,12 @@ const Menu = observer(() => {
         <Paper
             style={{
                 width: 1000,
-                overflow:'auto',
-                maxHeight:'300px',
-                // height:100,
+                overflow: 'auto',
+                maxHeight: '300px',
                 position: "absolute",
                 left: 20,
                 bottom: 0,
-                padding:'10px'
-                // border:'1px solid black'
+                padding: '10px'
             }}>
             <Outlet />
         </Paper>

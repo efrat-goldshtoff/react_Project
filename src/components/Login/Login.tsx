@@ -44,7 +44,7 @@ const Login = ({ successLogin, typeAction, close }
                     password: passwordRef.current?.value || ''
                 }
             });
-            
+
             setOpen(false);
             successLogin();
         } catch (error: any) {

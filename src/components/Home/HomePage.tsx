@@ -3,7 +3,6 @@ import { Box, Button } from "@mui/material";
 import { UserType } from "../Login/User";
 import Login from "../Login/Login";
 import AvatarU from "../Login/AvatarU";
-// import { UserContext } from "../Login/UserContext";
 
 const HomePage = () => {
     const initUser: UserType = {
@@ -18,7 +17,6 @@ const HomePage = () => {
     const [isLogin, setIsLogin] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState('Login');
-    // const [user, userDispatch] = useReducer(userReducer, initUser);
 
     const handleLoginSuccessful = () => {
         setIsLogin((now1) => {
@@ -28,7 +26,6 @@ const HomePage = () => {
     }
 
     return (<>
-        {/* <UserContext value={{ user, userDispatch }}> */}
         {!isLogin && (
             <Box
                 sx=
@@ -65,7 +62,6 @@ const HomePage = () => {
             />
         }
         {isLogin && <AvatarU />}
-        {/* </UserContext> */}
     </>)
 }
 export default HomePage;

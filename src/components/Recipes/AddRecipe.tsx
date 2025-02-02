@@ -23,7 +23,6 @@ const schema = yup.object().shape({
     ingredients: yup.string().required("Ingrediens are required"),
     products: yup.string().required("Products are required"),
     instructions: yup.string().required("Instruction is required")
-
 });
 const AddRecipe = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -36,17 +35,16 @@ const AddRecipe = () => {
     } = useForm({
         resolver: yupResolver(schema)
     });
-
     const onSubmit = (data: any) => {
         const recipe: Recipe = {
             title: data.title,
             description: data.description,
             products: data.products,
-            ingredients: data.ingredients.split(",").map((i:string)=>i.trim()),
+            ingredients: data.ingredients.split(",").map((i: string) => i.trim()),
             instructions: data.instructions,
             id: "",
             authorId: ""
-        };        
+        };
         if (context && context.user) {
             RecipesStore.addRecipe(recipe, context.user.id);
             reset();
@@ -60,38 +58,28 @@ const AddRecipe = () => {
                     <h2>Add A New Recipe</h2>
                     <TextField label='title'
                         {...register("title")}
-                        error={!!errors.title}
-                        helperText={errors.title?.message}
-                        fullWidth
-                        sx={{ mb: 2 }} />
+                        error={!!errors.title} helperText={errors.title?.message}
+                        fullWidth sx={{ mb: 2 }} />
                     <TextField label='description'
                         multiline
                         {...register("description")}
-                        error={!!errors.description}
-                        helperText={errors.description?.message}
-                        fullWidth
-                        sx={{ mb: 2 }} />
+                        error={!!errors.description} helperText={errors.description?.message}
+                        fullWidth sx={{ mb: 2 }} />
                     <TextField label='products'
                         multiline
                         {...register("products")}
-                        error={!!errors.products}
-                        helperText={errors.products?.message}
-                        fullWidth
-                        sx={{ mb: 2 }} />
+                        error={!!errors.products} helperText={errors.products?.message}
+                        fullWidth sx={{ mb: 2 }} />
                     <TextField label='ingredients'
                         multiline
                         {...register("ingredients")}
-                        error={!!errors.ingredients}
-                        helperText={errors.ingredients?.message}
-                        fullWidth
-                        sx={{ mb: 2 }} />
+                        error={!!errors.ingredients} helperText={errors.ingredients?.message}
+                        fullWidth sx={{ mb: 2 }} />
                     <TextField label='instructions'
                         multiline
                         {...register("instructions")}
-                        error={!!errors.instructions}
-                        helperText={errors.instructions?.message}
-                        fullWidth
-                        sx={{ mb: 2 }} />
+                        error={!!errors.instructions} helperText={errors.instructions?.message}
+                        fullWidth sx={{ mb: 2 }} />
                     <Button
                         type="submit"
                         variant="contained"
