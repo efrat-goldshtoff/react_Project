@@ -2,7 +2,6 @@ import { FormEvent, useContext, useRef, useState } from "react"
 import { UserContext } from "./UserContext";
 import axios from "axios";
 import { Box, Button, Modal, TextField } from "@mui/material";
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -14,7 +13,6 @@ const style = {
     boxShadow: 24,
     p: 4
 }
-
 const Login = ({ successLogin, typeAction, close }
     : { successLogin: Function; typeAction: string, close: Function }
 ) => {
@@ -26,27 +24,40 @@ const Login = ({ successLogin, typeAction, close }
     const handleSubmitLogin = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const link =
-                typeAction === "Sign"
-                    ? "http://localhost:3000/api/user/register"
-                    : "http://localhost:3000/api/user/login";
-            const result = await axios.post(link, {
-                firstName: firstNameRef.current?.value,
-                password: passwordRef.current?.value
-            });
-            setUserId(result.data.userId);
-
-            context?.userDispatch({
-                type: 'CREATE',
-                data: {
-                    id: result.data.userId,
-                    firstName: firstNameRef.current?.value || '',
-                    password: passwordRef.current?.value || ''
-                }
-            });
-
-            setOpen(false);
-            successLogin();
+            if (typeAction === 'Sign') {
+                const result = await axios.post("http://localhost:3000/api/user/register", {
+                    firstName: firstNameRef.current?.value,
+                    password: passwordRef.current?.value
+                });
+                setUserId(result.data.userId);
+                context?.userDispatch({
+                    type: 'CREATE',
+                    data: {
+                        id: result.data.userId,
+                        firstName: firstNameRef.current?.value || '',
+                        password: passwordRef.current?.value || ''
+                    }
+                });
+                setOpen(false);
+                successLogin();
+            }
+            else if (typeAction === 'Login') {
+                const result = await axios.post("http://localhost:3000/api/user/login", {
+                    firstName: firstNameRef.current?.value,
+                    password: passwordRef.current?.value
+                });
+                setUserId(result.data.user.id);
+                context?.userDispatch({
+                    type: 'CREATE',
+                    data: {
+                        id: result.data.user.id,
+                        firstName: firstNameRef.current?.value || '',
+                        password: passwordRef.current?.value || ''
+                    }
+                });
+                setOpen(false);
+                successLogin();
+            }
         } catch (error: any) {
             if (error.status === 400 || error.status === 401) {
                 alert(typeAction === "Sign" ? 'user already exists'

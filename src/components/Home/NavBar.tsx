@@ -18,7 +18,16 @@ const NavBar = () => {
             <Link to='/first' style={style}>first</Link>
             <Link to='/second' style={style}>second</Link>
             <Link to='/recipes' style={style}>recipes</Link>
-            {context?.user && context.user.id && (<Link to='/addRecipe' style={{ marginRight: "10px", color: 'purple' }}>addRecipe</Link>)}
+            {context?.user &&
+                context.user.id &&
+                (<Link to='/addRecipe'
+                    style={{
+                        marginRight: "10px",
+                        color: 'purple'
+                    }}>
+                    addRecipe
+                </Link>
+                )}
         </nav>
     </>)
 }
